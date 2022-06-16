@@ -13,8 +13,13 @@ let tweets = [];
 app.post("/sign-up" , (req,res)=>{
  const {username , avatar} = req.body
   users.push({username,avatar})
-  res.send("OK") // aqui n ta indo , ta dando erro no get
+   // aqui n ta indo , ta dando erro no get
+  if (!username || !avatar) {
+    res.sendStatus(400)
+  }
   console.log(users)
+  res.sendStatus(201)
+ 
 })
 
 app.get("/tweets", (req, res) => {
@@ -25,8 +30,13 @@ app.get("/tweets", (req, res) => {
 app.post("/tweets" , (req, res)=>{
   const {username , tweet} = req.body
   tweets.push({username,tweet})
+  
+  if (!username || !tweet) {
+    res.sendStatus(400)
+  }
   console.log(tweets)
-  res.send("OK")
+  res.sendStatus(201)
+
  })
  
  
