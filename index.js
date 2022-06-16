@@ -17,6 +17,18 @@ app.post("/sign-up" , (req,res)=>{
   console.log(users)
 })
 
+app.get("/tweets", (req, res) => {
+  const ultimos = tweets.slice(-10);
+  res.send(ultimos);
+});
+
+app.post("/tweets" , (req, res)=>{
+  const body = req.body
+  console.log(body)
+ })
+ 
+ 
+ 
 
 app.listen(5000 , ()=>{
 console.log("i`m alive")
