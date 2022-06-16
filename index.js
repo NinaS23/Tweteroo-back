@@ -11,8 +11,8 @@ let users = []
 let tweets = [];
 
 app.post("/sign-up" , (req,res)=>{
- const body = req.body
-  users.push(body)
+ const {username , avatar} = req.body
+  users.push({username,avatar})
   res.send("OK") // aqui n ta indo , ta dando erro no get
   console.log(users)
 })
