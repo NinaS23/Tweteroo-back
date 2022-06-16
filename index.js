@@ -23,8 +23,10 @@ app.get("/tweets", (req, res) => {
 });
 
 app.post("/tweets" , (req, res)=>{
-  const body = req.body
-  console.log(body)
+  const {username , tweet} = req.body
+  tweets.push({username,tweet})
+  console.log(tweets)
+  res.send("OK")
  })
  
  
