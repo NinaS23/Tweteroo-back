@@ -26,7 +26,7 @@ app.get("/tweets", (req, res) => {
 app.get("/tweets/:user", (req, res) => {
     const { user } = req.params;
     const usertweets = tweets.filter(tweet => {
-        if (tweet.username === user) return tweet;
+    if (tweet.username === user) return tweet;
   });
     res.send(usertweets)
 });
