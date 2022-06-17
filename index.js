@@ -14,7 +14,10 @@ app.post("/sign-up", (req, res) => {
       res.status(400).send("Todos os campos são obrigatórios!");
       return;
   }
-      users.push({username, avatar});
+    users.push({
+        username: username,
+        avatar: avatar
+        })
       res.status(201).send("created");
 });
 
