@@ -37,13 +37,13 @@ app.get("/tweets/:user", (req, res) => {
 app.post("/tweets", (req, res) => {
     const username = req.headers.user;
     const { tweet } = req.body;
-  
+   console.log(users[0].avatar)
     if (!username || !tweet) {
       res.status(400).send("Todos os campos são obrigatórios!");
       return;
   }
    let avatar = users.find((user) => user.username === username)
-       avatar = avatar || {avatar:username}
+       avatar = avatar || {avatar:users[0].avatar}
   tweets.push({
       username: username,
       avatar: avatar.avatar,
