@@ -1,6 +1,7 @@
 import express , {json}  from "express";
 import cors from "cors";
 
+
 const app = express()
 app.use(json())
 app.use(cors())
@@ -16,8 +17,7 @@ app.post("/sign-up", (req, res) => {
     return;
   }
     users.push({username, avatar});
-
-    res.status(200).send("OK!");
+    res.status(201).send("created");
     
    
 });
@@ -42,18 +42,20 @@ app.get("/tweets/:user", (req, res) => {
 app.post("/tweets", (req, res) => {
   const username = req.headers.user;
   const { tweet } = req.body;
-  const data = { username, tweet };
-   console.log(data.username)
   
   if (!username || !tweet) {
-    res.sendStatus(400);
+    res.status(400).send("Todos os campos são obrigatórios!");
+    return;
   }
-
-  const usuario = users.find((user) => user.username === data.username);
-  console.log(usuario)
-  
-  
-  res.sendStatus(201);
+  let avatar = users.find(user => user.username === username)
+  avatar = avatar || {avatar: ''}
+  tweets.push({
+      username: username,
+      avatar: avatar.avatar,
+      tweet: tweet
+  })
+  console.log(tweets)
+  res.status(201).send("CREATED")
 });
 
 
