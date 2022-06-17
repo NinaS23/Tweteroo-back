@@ -42,8 +42,8 @@ app.post("/tweets", (req, res) => {
       res.status(400).send("Todos os campos são obrigatórios!");
       return;
   }
-   let avatar = users.find(user => user.username === username)
-       avatar = avatar || {avatar: ''}
+   let avatar = users.find((user) => user.username === username)
+       avatar = avatar || {avatar:username}
   tweets.push({
       username: username,
       avatar: avatar.avatar,
