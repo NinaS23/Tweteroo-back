@@ -26,6 +26,25 @@ app.get("/tweets", (req, res) => {
     res.send(ultimos);
 });
 
+app.post("/tweets", (req, res) => {
+  const username = req.headers.user;
+  const { tweet } = req.body;
+ console.log(users[0].avatar)
+  if (!username || !tweet) {
+    res.status(400).send("Todos os campos são obrigatórios!");
+    return;
+}
+ let avatar = users.find((user) => user.username === username)
+     avatar = avatar || {avatar:users[0].avatar}
+tweets.push({
+    username: username,
+    avatar: avatar.avatar,
+    tweet: tweet
+})
+  console.log(tweets)
+  res.status(201).send("CREATED")
+});
+
 app.get("/tweets/:user", (req, res) => {
     const { user } = req.params;
     const usertweets = tweets.filter(tweet => {
@@ -34,24 +53,7 @@ app.get("/tweets/:user", (req, res) => {
     res.send(usertweets)
 });
 
-app.post("/tweets", (req, res) => {
-    const username = req.headers.user;
-    const { tweet } = req.body;
-   console.log(users[0].avatar)
-    if (!username || !tweet) {
-      res.status(400).send("Todos os campos são obrigatórios!");
-      return;
-  }
-   let avatar = users.find((user) => user.username === username)
-       avatar = avatar || {avatar:users[0].avatar}
-  tweets.push({
-      username: username,
-      avatar: avatar.avatar,
-      tweet: tweet
-  })
-    console.log(tweets)
-    res.status(201).send("CREATED")
-});
+
 
 
 app.listen(5000 , ()=>{
