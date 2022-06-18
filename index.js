@@ -35,7 +35,10 @@ app.post("/tweets", (req, res) => {
     return;
 }
  let avatar = users.find((user) => user.username === username)
-     avatar = avatar || {avatar:users[0].avatar}
+ console.log(avatar)
+ console.log(users[users.length-1].avatar)
+     avatar = avatar || {avatar:users[users.length-1].avatar}//da pra pegar o  ultimo do array de obj ( o ultimo 
+     //sempore vai ser o que está logando (pega o ultimo da array ao ivnes de users[0].avatar tenta users[users.length-1].avatar))  
 tweets.push({
     username: username,
     avatar: avatar.avatar,
