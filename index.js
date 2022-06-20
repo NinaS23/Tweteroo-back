@@ -28,7 +28,7 @@ app.get("/tweets", (req, res) => {
       res.status(400).send("informe uma página válida!!");
       return;
     }
-  if(parseInt(page) === 0){
+  if(parseInt(page) === 1){
     let startPoint = 10
     let start = (page - 1) * startPoint 
     let final = startPoint * page
