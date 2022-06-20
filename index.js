@@ -24,26 +24,17 @@ app.post("/sign-up", (req, res) => {
 app.get("/tweets", (req, res) => {
     const page = req.query.page
     console.log(page)
-    if(!page || parseInt(page) < 1){
+    if(!page || parseInt(page) < 2){
       res.status(400).send("informe uma página válida!!");
       return;
     }
-  if(parseInt(page) === 1){
-    let startPoint = 10
-    let start = (page - 1) * startPoint 
-    let final = startPoint * page
-    const NewTweets = [...tweets].reverse().splice(start,final)
-    res.send(NewTweets)
-  }
-  if(parseInt(page) > 0){
-    let startPoint = 10
-    let start = (page - 1) * startPoint + 1 
-    let final = startPoint * page
-    const NewTweets = [...tweets].reverse().splice(start,final)
-    res.send(NewTweets)
-  }
-   
     
+    let startPoint = 10
+    let start = (page - 1) * startPoint + 1
+    let final = startPoint * page
+    const NewTweets = [...tweets].reverse().splice(start,final)
+
+    res.send(NewTweets)
 });
 
 app.post("/tweets", (req, res) => {
