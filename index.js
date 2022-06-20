@@ -22,8 +22,28 @@ app.post("/sign-up", (req, res) => {
 });
 
 app.get("/tweets", (req, res) => {
-    const ultimos = tweets.slice(-10);
-    res.send(ultimos);
+    const page = req.query.page
+    console.log(page)
+    if(!page || parseInt(page) < 1){
+      res.status(400).send("informe uma página válida!!");
+      return;
+    }
+  if(parseInt(page) === 0){
+    let startPoint = 10
+    let start = (page - 1) * startPoint 
+    let final = startPoint * page
+    const NewTweets = [...tweets].reverse().splice(start,final)
+    res.send(NewTweets)
+  }
+  if(parseInt(page) > 0){
+    let startPoint = 10
+    let start = (page - 1) * startPoint + 1 
+    let final = startPoint * page
+    const NewTweets = [...tweets].reverse().splice(start,final)
+    res.send(NewTweets)
+  }
+   
+    
 });
 
 app.post("/tweets", (req, res) => {
@@ -35,8 +55,6 @@ app.post("/tweets", (req, res) => {
     return;
 }
  let avatar = users.find((user) => user.username === username)
- console.log(avatar)
- console.log(users[users.length-1].avatar)
      avatar = avatar || {avatar:users[users.length-1].avatar}
 tweets.push({
     username: username,
@@ -54,8 +72,6 @@ app.get("/tweets/:user", (req, res) => {
   });
     res.send(usertweets)
 });
-
-
 
 
 app.listen(5000 , ()=>{
