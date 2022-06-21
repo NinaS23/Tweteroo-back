@@ -56,10 +56,10 @@ tweets.push({
   res.status(201).send("CREATED")
 });
 
-app.get("/tweets/:user", (req, res) => {
-    const { user } = req.params;
+app.get("/tweets/:USERNAME", (req, res) => {
+    const { USERNAME } = req.params;
     const usertweets = tweets.filter(tweet => {
-    if (tweet.username === user) return tweet;
+    if (tweet.username === USERNAME) return tweet;
   });
     res.send(usertweets)
 });
